@@ -52,6 +52,28 @@ fastify.register(fastifyStatic, {
 	prefix: "/baremux/",
 	decorateReply: false,
 });
+// ===== AFTER existing routes and static registrations =====
+
+// serve our custom homepage
+import { join } from "node:path";
+
+fastify.get("/", (req, reply) => {
+  return reply.sendFile("index.html", join(process.cwd(), "public"));
+});
+
+// ===== THEN comes the listening code =====
+fastify.server.on("listening", () => {
+  const address = fastify.server.address();
+  ...
+});
+
+let port = parseInt(process.env.PORT || "");
+if (isNaN(port)) port = 8080;
+
+fastify.listen({
+  port: port,
+  host: "0.0.0.0",
+});
 
 fastify.server.on("listening", () => {
 	const address = fastify.server.address();
