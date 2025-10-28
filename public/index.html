@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Allowsi</title>
+    <style>
+      body {
+        background: #111;
+        color: #ccc;
+        font-family: sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Loading app…</h2>
+    <script type="module">
+      import { encodeUrl } from "@titaniumnetwork-dev/ultraviolet";
+
+      const DEFAULT_PAGE = "https://example.com"; // 👈 change this
+      const target = "/service/" + encodeUrl(DEFAULT_PAGE);
+      window.location.href = target;
+    </script>
+  </body>
+</html>
